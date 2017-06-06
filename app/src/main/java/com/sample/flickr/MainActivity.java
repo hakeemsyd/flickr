@@ -2,11 +2,15 @@ package com.sample.flickr;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -14,6 +18,7 @@ import rx.android.schedulers.AndroidSchedulers;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
+
+    private PhotosAdapter mAdapter;
 
     private List<Subscription> mSubs;
 
@@ -52,9 +59,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAdapter = new PhotosAdapter(this, Collections.<Photo>emptyList());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mSearch.addTextChangedListener(mWatcher);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayout.SHOW_DIVIDER_BEGINNING);
+        mRecycler.setLayoutManager(layoutManager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mRecycler.setItemAnimator(new DefaultItemAnimator());
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
@@ -93,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                         for(Photo p : photos.mList){
                             Log.i("", "Photo: " + p.mTitle );
                         }
+                        mAdapter.update(photos.mList);
+
                     }
                 });
 
