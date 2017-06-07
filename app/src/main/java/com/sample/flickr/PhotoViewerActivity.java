@@ -37,8 +37,8 @@ public class PhotoViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_view);
         ButterKnife.bind(this);
-        if (savedInstanceState != null) {
-            String uri = savedInstanceState.getString(KEY_URI, null);
+        if (getIntent() != null) {
+            String uri = getIntent().getExtras().getString(KEY_URI, null);
             if (uri != null) {
                 Picasso.with(this).load(uri).into(mImage);
             }
