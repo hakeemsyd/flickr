@@ -12,6 +12,7 @@ import rx.Observable;
 public interface FlickrService {
     @GET("/services/rest/")
     Observable<SearchResult> search(@Query("method") String method, @Query("api_key") String key,
-                                   @Query("text") String query);
+                                    @Query("text") String query, @Query("per_page") long perpage,
+                                    @Query("page") long page);
 
 }

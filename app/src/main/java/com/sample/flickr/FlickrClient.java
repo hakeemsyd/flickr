@@ -30,7 +30,7 @@ public class FlickrClient {
         return mClient;
     }
 
-    public Observable<SearchResult> search(String text) {
-        return mService.search("flickr.photos.search", Constants.API_KEY, text);
+    public Observable<SearchResult> search(String text, int page) {
+        return mService.search("flickr.photos.search", Constants.API_KEY, text, 100, page);
     }
 }

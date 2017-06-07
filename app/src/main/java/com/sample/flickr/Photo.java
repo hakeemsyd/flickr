@@ -8,7 +8,7 @@ import org.simpleframework.xml.Root;
  * Created by Hakeem on 6/6/17.
  */
 
-@Root(name="photos")
+@Root(name="photo")
 public class Photo {
     @Attribute( name = "id")
     public long mId;

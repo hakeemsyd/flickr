@@ -5,8 +5,8 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.sample.flickr"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -41,5 +41,8 @@ dependencies {
 
     //RxJava
     compile 'io.reactivex:rxjava:1.1.8'
+
+    //Imageview and image urls
+    compile 'com.squareup.picasso:picasso:2.5.0'
 
 }
